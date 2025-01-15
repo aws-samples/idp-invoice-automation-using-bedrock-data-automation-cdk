@@ -1,0 +1,1 @@
+You can get more samples from GitHub: https://github.com/aws-samples/invoice-processing-blog/tree/main 

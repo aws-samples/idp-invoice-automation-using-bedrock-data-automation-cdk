@@ -1,0 +1,13 @@
+{
+  "idp_stack_name" : "idp-bda",
+  "existing_vpc_id" : "",
+  "vpc": {
+    "cidr_range": "10.0.0.0/16",
+    "cidr_mask": 24
+  },
+  "invoices":{
+    "ssm_parameter_name": "/my-demo/inovices_blueprint_arn",
+    "blueprint_name":"invoices_blueprint",
+    "doc_type":"invoices"
+  }
+}

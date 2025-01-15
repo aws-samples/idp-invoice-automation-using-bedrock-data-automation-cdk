@@ -1,0 +1,141 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"description": "An invoice is a document that contains the list of service rendered or items purchased from a company by a person or another company. It contains details such as when the payment is due and how much is owed.",
+	"documentClass": "Invoices",
+	"type": "object",
+	"definitions": {
+		"LINEITEM": {
+			"type": "object",
+			"properties": {
+				"quantity": {
+					"type": "number",
+					"inferenceType": "extractive"
+				},
+				"unit price": {
+					"type": "number",
+					"inferenceType": "extractive"
+				},
+				"amount": {
+					"type": "number",
+					"inferenceType": "extractive",
+					"description": "Unit Price * Quantity"
+				},
+				"product name": {
+					"type": "string",
+					"inferenceType": "extractive",
+					"description": "The short name of the product without any extra details"
+				},
+				"product description": {
+					"type": "string",
+					"inferenceType": "extractive",
+					"description": "The full item list description text"
+				}
+			}
+		},
+		"SERVICES_TABLE": {
+			"type": "object",
+			"properties": {
+				"quantity": {
+					"type": "number",
+					"inferenceType": "extractive"
+				},
+				"unit price": {
+					"type": "number",
+					"inferenceType": "extractive"
+				},
+				"amount": {
+					"type": "number",
+					"inferenceType": "extractive",
+					"description": "Unit Price * Quantity"
+				},
+				"product name": {
+					"type": "string",
+					"inferenceType": "extractive",
+					"description": "The short name of the product without any extra details"
+				},
+				"product description": {
+					"type": "string",
+					"inferenceType": "extractive",
+					"description": "The full item list description text"
+				}
+			}
+		}
+	},
+	"properties": {
+		"SERVICES_TABLE": {
+			"type": "array",
+			"description": "Line items table listing all the items / services charged in the invoice including quantity, price, amount, product / service name and description.",
+			"items": {
+				"$ref": "#/definitions/SERVICES_TABLE"
+			}
+		},
+		"ID": {
+			"type": "string",
+			"inferenceType": "extractive",
+			"description": "Unique ID associated with the invoice"
+		},
+		"DATE": {
+			"type": "string",
+			"inferenceType": "extractive",
+			"description": "Date on which invoice was issued"
+		},
+		"PO": {
+			"type": "string",
+			"inferenceType": "extractive",
+			"description": "Purchase order number listed on the invoice"
+		},
+		"SUBTOTAL": {
+			"type": "number",
+			"inferenceType": "extractive",
+			"description": "sum of amounts listed in the line items table for services "
+		},
+		"TAX": {
+			"type": "array",
+			"inferenceType": "extractive",
+			"description": "list of tax amounts charged on the invoice",
+			"items": {
+				"type": "number"
+			}
+		},
+		"TOTAL": {
+			"type": "number",
+			"inferenceType": "extractive",
+			"description": "total amount due including subtotal and tax"
+		},
+		"VENDORNAME": {
+			"type": "string",
+			"inferenceType": "extractive",
+			"description": "name of the vendor issuing the invoice"
+		},
+		"VENDORADDRESS": {
+			"type": "string",
+			"inferenceType": "extractive",
+			"description": "address of the vendor issuing the invoice"
+		},
+		"RECIPIENTNAME": {
+			"type": "string",
+			"inferenceType": "extractive",
+			"description": "name of the person / organization receiving the invoice"
+		},
+		"RECIPIENTADDRESS": {
+			"type": "string",
+			"inferenceType": "extractive",
+			"description": "address of the person / organization receiving the invoice"
+		},
+		"VALIDATION": {
+			"type": "boolean",
+			"inferenceType": "extractive",
+			"description": "Is subtotal field = sum of amounts listed in the predict / services table?"
+		},
+		"VENDOR_TAX_ID": {
+			"type": "string",
+			"inferenceType": "extractive",
+			"description": "The ABN / VAT / PAN number associated with the vendor"
+		},
+		"RECEIVER_TAX_ID": {
+			"type": "string",
+			"inferenceType": "extractive",
+			"description": "The ABN / VAT / PAN number associated with the receiver"
+		}
+	}
+}
